@@ -37,7 +37,7 @@ Forecast a model from the fable intermittentATA model
 }
 \examples{
 library(intermittentATA)
-as_tsibble(fmcgData) \%>\% 
+as_tsibble(fmcgData) \%>\%
    model(crostonata = intermittentATA(value ~ d_trend(type = "M", parQ = 1) + i_trend("A") + intermittent("croston"))) \%>\% forecast(h=6)
 
 }

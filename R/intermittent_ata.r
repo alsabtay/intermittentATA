@@ -3,7 +3,7 @@
 "_PACKAGE"
 
 #' @importFrom ATAforecasting ATA.SeasAttr ATA.BoxCoxAttr ATA
-#' @importFrom tsibble measured_vars as_tibble tibble index
+#' @importFrom tsibble measured_vars as_tibble tibble index yearmonth
 #' @importFrom rlang expr_text
 #' @importFrom stats frequency ts start
 #' @importFrom fabletools get_frequencies
@@ -283,7 +283,7 @@ if (intermittent == "sba") {
                                     "method" = i_mdl_ATA$method,
                                     "onestep" = i_mdl_ATA$onestep
                       ),
-                      intermittent = list("type" = intermittent, 
+                      intermittent = list("type" = intermittent,
                                           "method" = paste("IntermittentATA[", intermittent, ", D", substr(d_mdl_ATA$method, 4, 22), ", I", substr(i_mdl_ATA$method, 4, 22), sep="")
                                       )
                       ),
@@ -390,7 +390,7 @@ specials_intermittentATA <- fabletools::new_specials(
 
 #' Intermittent demand time series analysis using the Ata Method based on the ATAforecasting package.
 #'
-#' Intermittent Ata Method is based on Croston's (1972) <doi:10.2307/3007885> method for intermittent demand forecasting, also described in Shenstone and Hyndman (2005) <doi:10.1002/for.963>. 
+#' Intermittent Ata Method is based on Croston's (1972) <doi:10.2307/3007885> method for intermittent demand forecasting, also described in Shenstone and Hyndman (2005) <doi:10.1002/for.963>.
 #' Croston's method involves using simple exponential smoothing (SES) on the non-zero elements of the time series and a separate application of (SES) to the times between non-zero elements of the time series.
 #'
 #' There are two variant methods available which apply multiplicative correction factors
@@ -399,9 +399,9 @@ specials_intermittentATA <- fabletools::new_specials(
 #' and for the Shale-Boylan-Johnston method (`type = "sbj"`), this factor is
 #' \eqn{1 - \alpha / (2 - \alpha)}, where \eqn{\alpha} is the smoothing parameter for
 #' the interval SES application.
-#' 
+#'
 #' Returns IntermittentATA[intermittent.type, D(p,q,phi)(E,T,S), I(p,q,phi)(E,T,S)] applied to time series data.
-#' 
+#'
 #' The Ata method based on the modified simple exponential smoothing as described in Yapar, G. (2016) <doi:10.15672/HJMS.201614320580> ,
 #' Yapar G., Capar, S., Selamlar, H. T., Yavuz, I. (2017) <doi:10.15672/HJMS.2017.493> and Yapar G., Selamlar, H. T., Capar, S., Yavuz, I. (2019)
 #' <doi:10.15672/hujms.461032> is a new univariate time series forecasting method which provides innovative solutions to issues faced during
@@ -597,7 +597,7 @@ specials_intermittentATA <- fabletools::new_specials(
 #'   `type`     \tab Default is "croston". For the Syntetos-Boylan approximation (`type = "sba"`), this factor is \eqn{1 - \alpha / 2}, and for the Shale-Boylan-Johnston method (`type = "sbj"`), this factor is \eqn{1 - \alpha / (2 - \alpha)}, where \eqn{\alpha} is the smoothing parameter for the interval ATA Method application. \cr
 #' }
 #' }
-#' 
+#'
 #' @return A model specification.
 #'
 #' @importFrom fabletools new_model_class new_model_definition
@@ -628,10 +628,10 @@ intermittentATA <- function(formula, ...){
 #'
 #' @examples
 #' library(intermittentATA)
-#' as_tsibble(fmcgData) %>% 
+#' as_tsibble(fmcgData) %>%
 #'    model(crostonata = intermittentATA(value ~ d_trend(type = "M", parQ = 1) + i_trend("A") + intermittent("croston"))) %>% forecast(h=6)
 #'
-#' @importFrom tsibble is_tsibble as_tibble measured_vars index
+#' @importFrom tsibble is_tsibble as_tibble measured_vars index yearmonth
 #' @importFrom rlang enquo expr_text
 #' @importFrom tsbox ts_ts
 #' @importFrom stats frequency ts start
@@ -688,9 +688,9 @@ forecast.intermittentATA <- function(object, new_data, h=NULL, ci_level=95, nega
 
     d_fc <- d_pfc[["result"]]
     i_fc <- i_pfc[["result"]]
-  
+
      interval_param <- mdl$i_model$p / length(mdl$i_model$actual)
-  
+
      if (spec_mdl$intermittent$type == "sba") {
         coeff <- 1 - interval_param / 2
       } else if (spec_mdl$intermittent$type == "sbj") {
@@ -699,11 +699,11 @@ forecast.intermittentATA <- function(object, new_data, h=NULL, ci_level=95, nega
         coeff <- 1
       }
       ratio <- coeff * d_fc$forecast / i_fc$forecast
-    
+
       # Out-of-sample demand rate
       fc_demand_rate <- rep(c(NA_real_, ratio), diff(c(0, non_zero, length(test_set$yh))))
     }
- 
+
   # Return forecasts
   distributional::dist_degenerate(fc_demand_rate)
 }
@@ -751,9 +751,9 @@ residuals.intermittentATA <- function(object, ...){
 #'
 #' @examples
 #' library(intermittentATA)
-#' as_tsibble(fmcgData) %>% 
+#' as_tsibble(fmcgData) %>%
 #'    model(crostonata = intermittentATA(value ~ d_trend(type = "M", parQ = 1) + i_trend("A") + intermittent("croston"))) %>% components()
-#' 
+#'
 #' @export
 components.intermittentATA <- function(object, ...){
   d_cmp <- object$components$d_components
@@ -897,7 +897,7 @@ components.intermittentATA <- function(object, ...){
 #'
 #' @examples
 #' library(intermittentATA)
-#' as_tsibble(fmcgData) %>% 
+#' as_tsibble(fmcgData) %>%
 #'    model(crostonata = intermittentATA(value ~ d_trend(type = "M", parQ = 1) + i_trend("A") + intermittent("croston"))) %>% glance()
 #'
 #' @importFrom tibble as_tibble
@@ -916,7 +916,7 @@ glance.intermittentATA <- function(x, ...){
 #'
 #' @examples
 #' library(intermittentATA)
-#' as_tsibble(fmcgData) %>% 
+#' as_tsibble(fmcgData) %>%
 #'     model(crostonata = intermittentATA(value ~ d_trend(type = "M", parQ = 1) + i_trend("A") + intermittent("croston"))) %>% tidy()
 #'
 #' @export
@@ -953,11 +953,11 @@ format.intermittentATA <- function(x, ...){
 #' @param object An estimated model.
 #' @param ... Unused.
 #'
-#' @return a summary for the results of the ATAforecasting 
+#' @return a summary for the results of the ATAforecasting
 #'
 #' @examples
 #'  library(intermittentATA)
-#'  as_tsibble(fmcgData) %>% 
+#'  as_tsibble(fmcgData) %>%
 #'      model(crostonata = intermittentATA(value ~ d_trend(type = "M", parQ = 1) + i_trend("A") + intermittent("croston"))) %>% report()
 #'
 #' @export

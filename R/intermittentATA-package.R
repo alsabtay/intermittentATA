@@ -9,7 +9,7 @@
 #' @importFrom rlang enquo expr expr_text sym
 #' @importFrom stats frequency ts start
 #' @importFrom tsbox ts_ts ts_tsibble
-#' @importFrom tsibble as_tibble index is_tsibble measured_vars
+#' @importFrom tsibble as_tibble index is_tsibble measured_vars yearmonth
 #' @importFrom tibble as_tibble
 #' @importFrom lubridate decimal_date
 NULL

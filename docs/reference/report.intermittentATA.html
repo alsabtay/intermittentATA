@@ -74,13 +74,105 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://alsabtay.github.io/intermittentATA/" class="external-link">intermittentATA</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="fu"><a href="https://tsibble.tidyverts.org/reference/as-tsibble.html" class="external-link">as_tsibble</a></span><span class="op">(</span><span class="va">fmcgData</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span></span>
-<span class="r-in"><span>     <span class="fu"><a href="https://fabletools.tidyverts.org/reference/model.html" class="external-link">model</a></span><span class="op">(</span>crostonata <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/intermittentATA/man/intermittentATA-package.html" class="external-link">intermittentATA</a></span><span class="op">(</span><span class="va">value</span> <span class="op">~</span> <span class="fu">d_trend</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"M"</span>, parQ <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i_trend</span><span class="op">(</span><span class="st">"A"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">intermittent</span><span class="op">(</span><span class="st">"croston"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://fabletools.tidyverts.org/reference/report.html" class="external-link">report</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>1 error encountered for crostonata</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> [1] could not find function "yearmonth"</span>
+<span class="r-in"><span> <span class="fu"><a href="https://tsibble.tidyverts.org/reference/as-tsibble.html" class="external-link">as_tsibble</a></span><span class="op">(</span><span class="va">fmcgData</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
+<span class="r-in"><span>     <span class="fu"><a href="https://fabletools.tidyverts.org/reference/model.html" class="external-link">model</a></span><span class="op">(</span>crostonata <span class="op">=</span> <span class="fu"><a href="https://alsabtay.github.io/intermittentATA/reference/intermittentATA-package.html" class="external-link">intermittentATA</a></span><span class="op">(</span><span class="va">value</span> <span class="op">~</span> <span class="fu">d_trend</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"M"</span>, parQ <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fu">i_trend</span><span class="op">(</span><span class="st">"A"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">intermittent</span><span class="op">(</span><span class="st">"croston"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://fabletools.tidyverts.org/reference/report.html" class="external-link">report</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Series: value </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Model: NULL model </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> NULL model</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: IntermittentATA[croston, D(2,1,0) (A,M,N), I(3,3,0.2) (A,Ad,N)] </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------Intermittent ATA Model------------------------ </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Intermittent Type:croston</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------ATA Model for Demand-------------------------- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ATA(2,1,0) (A,M,N) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    model.type: M </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    seasonal.model: no seasonality </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    forecast horizon: 1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    accuracy.type: sMAPE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In-Sample Accuracy Measures: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sigma2     loglik        MAE        MSE       RMSE        MPE       MAPE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   9.226591 -14.943159   1.103571   3.459972   1.860100 -65.089286  95.267857 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      sMAPE       MASE        OWA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  51.191447   1.471429  14.811434 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In-Sample Accuracy Measures: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        MdAE        MdSE       RMdSE        MdPE       MdAPE      sMdAPE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.6166667   0.3872222   0.6222718 -19.0476191  44.0476191  42.2647528 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Out-Sample Accuracy Measures: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   MAE   MSE  RMSE   MPE  MAPE sMAPE  MASE   OWA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    NA    NA    NA    NA    NA    NA    NA    NA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Out-Sample Accuracy Measures: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   MdAE   MdSE  RMdSE   MdPE  MdAPE sMdAPE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     NA     NA     NA     NA     NA     NA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Information Criteria: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      AIC     AICc      BIC </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 41.88632 83.88632 43.06966 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.002   0.000   0.002 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> calculation.time: 0.0021 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ---------ATA Model for Interval------------------------n</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ATA(3,3,0.2) (A,Ad,N) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    model.type: A </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    seasonal.model: no seasonality </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    forecast horizon: 1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    accuracy.type: sMAPE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In-Sample Accuracy Measures: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       sigma2       loglik          MAE          MSE         RMSE          MPE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  171.1457122  -28.0850742    5.4977022   64.1796421    8.0112198 -165.6419376 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         MAPE        sMAPE         MASE          OWA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  215.7209845   66.4127496    0.8796323    6.0563144 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> In-Sample Accuracy Measures: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       MdAE       MdSE      RMdSE       MdPE      MdAPE     sMdAPE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  2.4255549  6.0644135  2.4626030 -0.2265625 50.0284531 54.8264964 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Out-Sample Accuracy Measures: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   MAE   MSE  RMSE   MPE  MAPE sMAPE  MASE   OWA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    NA    NA    NA    NA    NA    NA    NA    NA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Out-Sample Accuracy Measures: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   MdAE   MdSE  RMdSE   MdPE  MdAPE sMdAPE </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     NA     NA     NA     NA     NA     NA </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Information Criteria: </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       AIC      AICc       BIC </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  68.17015 110.17015  69.35350 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.003   0.000   0.003 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> calculation.time: 0.0028 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

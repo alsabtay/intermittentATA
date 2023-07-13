@@ -19,7 +19,7 @@ Specialized Screen Print Function of intermittentATA model
 }
 \examples{
  library(intermittentATA)
- as_tsibble(fmcgData) \%>\% 
+ as_tsibble(fmcgData) \%>\%
      model(crostonata = intermittentATA(value ~ d_trend(type = "M", parQ = 1) + i_trend("A") + intermittent("croston"))) \%>\% report()
 
 }

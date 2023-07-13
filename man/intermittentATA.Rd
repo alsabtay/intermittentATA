@@ -15,7 +15,7 @@ intermittentATA(formula, ...)
 A model specification.
 }
 \description{
-Intermittent Ata Method is based on Croston's (1972) <doi:10.2307/3007885> method for intermittent demand forecasting, also described in Shenstone and Hyndman (2005) <doi:10.1002/for.963>. 
+Intermittent Ata Method is based on Croston's (1972) <doi:10.2307/3007885> method for intermittent demand forecasting, also described in Shenstone and Hyndman (2005) <doi:10.1002/for.963>.
 Croston's method involves using simple exponential smoothing (SES) on the non-zero elements of the time series and a separate application of (SES) to the times between non-zero elements of the time series.
 }
 \details{
